@@ -1,0 +1,99 @@
+.slider {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    padding: 20px; // Adds space from the edges
+  
+    .slider-grid {
+      display: flex;
+      width: 90%; // Ensures it does not touch the edges
+      height: 70%;
+      position: relative;
+      gap: 20px; // Creates spacing between columns
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Light shadow for separation
+  
+      
+    }
+  
+    // Invisible Borders
+    .border-left,
+    .border-right,
+    .border-middle {
+      position: absolute;
+      width: 10px; // Adjust thickness
+      height: 100%;
+      background: transparent; // Invisible
+      pointer-events: none;
+      border: 1px solid rgba(0, 0, 0, 0.1); // Faint visibility on hover
+    }
+  
+    .border-left {
+      left: 0;
+    }
+  
+    .border-middle {
+      left: 70%;
+    }
+  
+    .border-right {
+      right: 0;
+    }
+  
+    // Left Section - Vertical Auto-Slider
+    .vertical-slider {
+      width: 68%; // Slightly reduced to fit the gap
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background: #f4f4f4;
+      border-radius: 10px; // Smooth corners for better aesthetics
+  
+      .slides-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.7s ease-in-out;
+      }
+  
+      .slide {
+        width: 100%;
+        height: 100%;
+        flex: 0 0 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px; // Adds rounded corners for a modern look
+      }
+    }
+  
+    // Right Section - Hot Deals Poster
+    .hot-deals {
+      width: 40%; // Adjusted for the gap
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Light shadow for separation
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+    }
+  }
+  
