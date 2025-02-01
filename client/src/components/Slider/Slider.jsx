@@ -17,14 +17,16 @@ const Slider = () => {
   useEffect(() => {
     let interval;
 
-    if (isHovered) {
-      interval = setInterval(() => {
-        setCurrentSlide((prev) =>
-          prev === trendingProducts.length - 1 ? 0 : prev + 1
-        );
-      }, 3000); // Change slide every 3 seconds
-    }
+    // Set the interval based on hover state
+    const intervalTime = isHovered ? 3000 : 2000; // 3 seconds if hovered, 2 second otherwise
 
+    interval = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === trendingProducts.length - 1 ? 0 : prev + 1
+      );
+    }, intervalTime);
+
+    // Cleanup interval on unmount or state change
     return () => clearInterval(interval);
   }, [isHovered, trendingProducts.length]);
 

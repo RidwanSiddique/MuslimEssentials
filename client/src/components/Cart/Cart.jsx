@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Cart.scss";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ import { loadStripe } from "@stripe/stripe-js";
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const totalPrice = () => {
     let total = 0;
@@ -31,39 +33,52 @@ const Cart = () => {
       await stripe.redirectToCheckout({
         sessionId: res.data.stripeSession.id,
       });
-
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
-    <div className="cart">
-      <h1>Products in your cart</h1>
-      {products?.map((item) => (
-        <div className="item" key={item.id}>
-          <img src={process.env.REACT_APP_UPLOAD_URL + item.img} alt="" />
-          <div className="details">
-            <h1>{item.title}</h1>
-            <p>{item.desc?.substring(0, 100)}</p>
-            <div className="price">
-              {item.quantity} x ${item.price}
-            </div>
-          </div>
-          <DeleteOutlinedIcon
-            className="delete"
-            onClick={() => dispatch(removeItem(item.id))}
-          />
-        </div>
-      ))}
-      <div className="total">
-        <span>SUBTOTAL</span>
-        <span>${totalPrice()}</span>
+    <>
+      {/* Floating Cart Icon */}
+      <div className="floating-cart-icon" onClick={() => setIsCartOpen(!isCartOpen)}>
+        <ShoppingCartIcon />
+        {products.length > 0 && <span className="cart-count">{products.length}</span>}
       </div>
-      <button onClick={handlePayment}>PROCEED TO CHECKOUT</button>
-      <span className="reset" onClick={() => dispatch(resetCart())}>
-        Reset Cart
-      </span>
-    </div>
+
+      {/* Cart Overlay */}
+      {isCartOpen && (
+        <div className="cart-overlay">
+          <div className="cart">
+            <h1>Products in your cart</h1>
+            {products?.map((item) => (
+              <div className="item" key={item.id}>
+                <img src={process.env.REACT_APP_UPLOAD_URL + item.img} alt="" />
+                <div className="details">
+                  <h1>{item.title}</h1>
+                  <p>{item.desc?.substring(0, 100)}</p>
+                  <div className="price">
+                    {item.quantity} x ${item.price}
+                  </div>
+                </div>
+                <DeleteOutlinedIcon
+                  className="delete"
+                  onClick={() => dispatch(removeItem(item.id))}
+                />
+              </div>
+            ))}
+            <div className="total">
+              <span>SUBTOTAL</span>
+              <span>${totalPrice()}</span>
+            </div>
+            <button onClick={handlePayment}>PROCEED TO CHECKOUT</button>
+            <span className="reset" onClick={() => dispatch(resetCart())}>
+              Reset Cart
+            </span>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

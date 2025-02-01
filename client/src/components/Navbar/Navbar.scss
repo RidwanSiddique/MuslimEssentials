@@ -1,57 +1,69 @@
 .navbar {
-    height: 80px;
-  
-    .wrapper {
-      padding: 10px 30px;
+  height: 80px;
+
+  .wrapper {
+    padding: 10px 30px;
+    display: flex;
+    align-items: flex-start; // Align items to the top
+    justify-content: space-between;
+
+    .item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-  
-      .item {
-        display: flex;
-        align-items: center;
-        font-size: 18px;
+      font-size: 18px;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      padding-top: 20px; // Push left items 10px down from the top
+    }
+
+    .center {
+      display: flex;
+      align-items: center; // Keep the logo vertically centered
+      justify-content: center;
+      flex: 1; // Takes up remaining space to center the logo
+      text-align: center;
+
+      .logo {
+        height: 80px; // Increased height for a bigger logo
+        width: auto; // Maintain aspect ratio
       }
-  
-      .left {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-      }
-      .center {
-        font-size: 30px;
-        letter-spacing: 2px;
-      }
-      .right {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-  
-        .icons {
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      padding-top: 20px; // Push right items 10px down from the top
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      color: #777;
+      cursor: pointer;
+
+      .cartIcon {
+        position: relative;
+
+        span {
+          font-size: 12px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: #2879fe;
+          color: white;
+          position: absolute;
+          right: -10px;
+          top: -10px;
           display: flex;
-          gap: 15px;
-          color: #777;
-          cursor: pointer;
-  
-          .cartIcon {
-            position: relative;
-  
-            span {
-              font-size: 12px;
-              width: 20px;
-              height: 20px;
-              border-radius: 50%;
-              background-color: #2879fe;
-              color: white;
-              position: absolute;
-              right: -10px;
-              top: -10px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-          }
+          align-items: center;
+          justify-content: center;
         }
       }
     }
   }
+}

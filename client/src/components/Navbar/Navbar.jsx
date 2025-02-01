@@ -32,11 +32,13 @@ export const Navbar = () => {
               </div>
             </div>
             <div className="center">
-              <Link className ="link" to="/">Muslim Essentials</Link>
+              <Link className="link" to="/">
+                <img src="/img/logo_tr_notxt.png" alt="Muslim Essentials Logo" className="logo" />
+              </Link>
             </div>
             <div className="right">
               <div className="item">
-                <Link className ="link" to="/">Homepage</Link>
+                <Link className ="link" to="/">Home</Link>
               </div>
               <div className="item">
                 <Link className ="link" to="/">About</Link>
